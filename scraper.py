@@ -10,7 +10,9 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+import os
+creds_path = os.path.join(os.path.dirname(__file__), "credentials.json")
+creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
 client = gspread.authorize(creds)
 sheet = client.open("Job Scraper").sheet1
 
