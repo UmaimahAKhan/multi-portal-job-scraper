@@ -10,9 +10,14 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+import json
 import os
-creds_path = os.path.join(os.path.dirname(__file__), "credentials.json")
-creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Load credentials from GitHub secret
+creds_json = os.environ["GSHEET_CREDS"]
+creds_dict = json.loads(creds_json)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 sheet = client.open("Job Scraper").sheet1
 
