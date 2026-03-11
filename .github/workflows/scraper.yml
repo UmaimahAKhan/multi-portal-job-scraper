@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+      GSHEET_CREDS: ${{ secrets.GSHEET_CREDS }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
